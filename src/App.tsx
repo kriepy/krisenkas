@@ -1,21 +1,42 @@
-import * as React from 'react';
-import './App.css';
+import * as React from "react";
+import "./App.css";
+import logo from "./assets/images/logo-small.png";
 
-import logo from './logo.svg';
+import DefinitionComponent from "./components/DefinitionComponent/DefinitionComponent";
 
 class App extends React.Component {
   public render() {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
+          <div className="App-logo" onClick={this.onLogoClickHandler}>
+            <img src={logo} alt="" />
+          </div>
         </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.tsx</code> and save to reload.
-        </p>
+        <div className="content">
+          <h2 className="content-title">
+            Here are some words I think are funny. I like to say them out loud
+            and laugh!
+          </h2>
+          <div className="Definitions">
+            <DefinitionComponent
+              word="Ointment"
+              phonetic="/ˈɔɪntm(ə)nt/"
+              description="a smooth oily substance that is rubbed on the skin for medicinal purposes or as a cosmetic."
+            />
+            <DefinitionComponent
+              word="nervous breakdown"
+              phonetic="/ˈnərvəs ˈbreɪkdaʊn/"
+              description="Nervous breakdown and mental breakdown are dated terms describing emotional or physical stress that temporarily makes someone unable to function in day-to-day life."
+            />
+          </div>
+        </div>
       </div>
     );
+  }
+
+  private onLogoClickHandler() {
+    console.log("Redirect to Home screen");
   }
 }
 
