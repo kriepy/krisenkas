@@ -27,7 +27,12 @@ class App extends React.Component {
             <DefinitionComponent
               word="nervous breakdown"
               phonetic="/ˈnərvəs ˈbreɪkdaʊn/"
-              description="Nervous breakdown and mental breakdown are dated terms describing emotional or physical stress that temporarily makes someone unable to function in day-to-day life."
+              description="nervous breakdown and mental breakdown are dated terms describing emotional or physical stress that temporarily makes someone unable to function in day-to-day life."
+            />
+            <DefinitionComponent
+              word="toboggan"
+              phonetic="/təˈbɒɡ(ə)n/"
+              description="a long, light, narrow vehicle, typically on runners, used for sliding downhill over snow or ice."
             />
           </div>
         </div>
