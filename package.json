@@ -5,13 +5,19 @@
   "author": "kriepy <k.rieping@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "bulma": "^0.7.4",
     "react": "^16.8.5",
     "react-dom": "^16.8.5"
   },
   "devDependencies": {
     "@types/react": "^16.8.8",
     "@types/react-dom": "^16.8.3",
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "node-sass": "^4.11.0",
     "parcel-bundler": "^1.12.3",
+    "sass": "^1.17.3",
     "typescript": "^3.3.4000"
   },
   "scripts": {
