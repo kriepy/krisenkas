@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import App from './components/App';
-import Firebase, { FirebaseContext } from './components/firebase';
+import Firebase, { FirebaseContext } from './components/Firebase';
 
 
 const root = document.getElementById('root') as HTMLElement;
