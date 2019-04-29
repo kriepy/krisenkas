@@ -18,7 +18,7 @@ class Firebase {
     this.auth = app.auth();
   }
 
-  doSignInWithEmailAndPassword = (email, password) =>
+  doSignInWithEmailAndPassword = (email, password) => 
     this.auth.signInWithEmailAndPassword(email, password);
 
   doSignOut = () => this.auth.signOut();

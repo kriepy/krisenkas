@@ -1,13 +1,17 @@
 import * as React from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from 'react-router-dom';
+import { compose } from 'recompose';
 
 import * as ROUTES from "../../constants/routes";
+import { FirebaseContext } from '../Firebase';
+
 
 const SignInPage = () => (
   <div>
     <h1>SignIn</h1>
-    <SignInForm />
-  </div>
+    <FirebaseContext.Consumer>
+      {firebase => <SignInForm firebase={firebase} />}
+    </FirebaseContext.Consumer>  </div>
 );
 
 const INITIAL_STATE = {
@@ -16,7 +20,10 @@ const INITIAL_STATE = {
   error: null
 };
 
-interface IProps {}
+interface IProps {
+    firebase;
+    history;
+}
 
 interface IState {
   email?: string;
@@ -24,22 +31,35 @@ interface IState {
   error?: Error;
 }
 
-class SignInForm extends React.Component<IProps, IState> {
+class SignInFormBase extends React.Component<IProps, IState> {
   constructor(props) {
     super(props);
     this.state = { ...INITIAL_STATE };
   }
 
-  onSubmit = event => {};
+  onSubmit = event => {
+      const { email, password } = this.state
+
+      this.props.firebase
+      .doSignInWithEmailAndPassword(email, password)
+      .then(authUser => {
+        console.log(authUser)
+        this.setState({ ...INITIAL_STATE });
+        this.props.history.push(ROUTES.HOME);
+      })
+      .catch(error => {
+        this.setState({ error });
+      });
+
+    event.preventDefault();
+  };
 
   onChange = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
 
   render() {
-    const email = this.state.email;
-    const password = this.state.password;
-    const error = this.state.error;
+    const { email, password, error } = this.state;
 
     const isInvalid = password === "" || email === "";
 
@@ -74,6 +94,8 @@ const SignInLink = () => (
     Want to login? <Link to={ROUTES.SIGNIN}>Sign In</Link>
   </p>
 );
+
+const SignInForm = compose(withRouter)(SignInFormBase);
 
 export default SignInPage;
 
