@@ -1,17 +1,15 @@
 import * as React from "react";
-import { Link, withRouter } from 'react-router-dom';
-import { compose } from 'recompose';
+import { Link, withRouter } from "react-router-dom";
+import { compose } from "recompose";
 
 import * as ROUTES from "../../constants/routes";
-import { FirebaseContext } from '../Firebase';
-
+import { withFirebase } from "../Firebase";
 
 const SignInPage = () => (
   <div>
     <h1>SignIn</h1>
-    <FirebaseContext.Consumer>
-      {firebase => <SignInForm firebase={firebase} />}
-    </FirebaseContext.Consumer>  </div>
+    <SignInForm />
+  </div>
 );
 
 const INITIAL_STATE = {
@@ -21,8 +19,8 @@ const INITIAL_STATE = {
 };
 
 interface IProps {
-    firebase;
-    history;
+  firebase;
+  history;
 }
 
 interface IState {
@@ -38,12 +36,12 @@ class SignInFormBase extends React.Component<IProps, IState> {
   }
 
   onSubmit = event => {
-      const { email, password } = this.state
+    const { email, password } = this.state;
 
-      this.props.firebase
+    this.props.firebase
       .doSignInWithEmailAndPassword(email, password)
       .then(authUser => {
-        console.log(authUser)
+        console.log(authUser);
         this.setState({ ...INITIAL_STATE });
         this.props.history.push(ROUTES.HOME);
       })
@@ -95,7 +93,10 @@ const SignInLink = () => (
   </p>
 );
 
-const SignInForm = compose(withRouter)(SignInFormBase);
+const SignInForm = compose(
+  withRouter,
+  withFirebase
+)(SignInFormBase);
 
 export default SignInPage;
 
