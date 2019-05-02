@@ -5,7 +5,7 @@ import Navigation from './Navigation';
 
 import LandingPage from './Landing';
 import SignInPage from './SignIn/index';
-import SignOutPage from './SignOut';
+import SignOutPage from './SignOut/index';
 import HomePage from './Home';
 
 import * as ROUTES from '../constants/routes';
