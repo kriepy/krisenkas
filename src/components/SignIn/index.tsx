@@ -3,12 +3,14 @@ import { Link, withRouter } from "react-router-dom";
 import { compose } from "recompose";
 
 import * as ROUTES from "../../constants/routes";
-import { withFirebase } from "../Firebase";
+import { FirebaseContext } from "../Firebase";
 
 const SignInPage = () => (
   <div>
     <h1>SignIn</h1>
-    <SignInForm />
+    <FirebaseContext.Consumer>
+      {firebase => <SignInForm firebase={firebase} />}
+    </FirebaseContext.Consumer>
   </div>
 );
 
@@ -94,8 +96,7 @@ const SignInLink = () => (
 );
 
 const SignInForm = compose(
-  withRouter,
-  withFirebase
+  withRouter
 )(SignInFormBase);
 
 export default SignInPage;
